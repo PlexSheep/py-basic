@@ -1,7 +1,8 @@
 #!/bin/env python3
-from time import localtime, sleep, struct_time, time
+import time
 import datetime
 import sys
+import time
 
 
 class stopwatch:
@@ -17,7 +18,7 @@ class stopwatch:
             text1 = ("elapsed:\t%s" % elapsed)
             sys.stdout.write('\r' + str(text0+"\t\t"+text1) + "\t" * 3)
             sys.stdout.flush()
-            sleep(1)                        
+            time.sleep(1)
 
 def main():
     try:
