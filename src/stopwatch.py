@@ -23,7 +23,30 @@ except:
 def eprint(*args, **kwargs):
     print(*args, file=sys.stderr, **kwargs)
 
-class stopwatch:
+class Animation:
+    X_SIZE = 8
+    Y_SIZE = 3
+    field = [
+        ['>', '>' * (X_SIZE - 2), 'v',],
+        ['^', ' ' * (X_SIZE - 2), 'v',] * (Y_SIZE - 2),
+        ['^', '<' * (X_SIZE - 2), '<',],
+        ]
+    def __init__(self) -> None:
+        pass
+
+    def tick(self) -> list[str]:
+        out_arr: list[str] = []
+        for line in self.field:
+            out_arr.append(self.__char_array_to_str(line))
+        return out_arr
+
+    def __char_array_to_str(self, chars) -> str :
+        out_str = ""
+        for char in chars:
+            out_str += char
+        return out_str
+
+class Stopwatch:
 
     beep_at: int
     beep_at_time: datetime.datetime
@@ -32,17 +55,20 @@ class stopwatch:
     enable_sound: bool = False
     screen: curses.window
     next_line = 0
+    enable_animation: bool
+    animation: Animation
 
     BUFFER_LINE = '=' * 120
     COL0_Y = 0
     COL1_Y = 44
     COL2_Y = 90
 
-    def __init__(self, beep_at, enable_sound, screen: curses.window) -> None:
+    def __init__(self, beep_at, enable_sound, screen: curses.window, enable_animation: bool) -> None:
         self.screen = screen
         self.screen.addstr(0, 0, self.BUFFER_LINE)
         self.next_line += 2
         self.start_time = datetime.datetime.now().replace(microsecond=0)
+        self.enable_animation = enable_animation
         if enable_sound:
             self.enable_sound = enable_sound
         if not beep_at <= 0:
@@ -99,6 +125,25 @@ class stopwatch:
                 self.screen.addstr(self.next_line, self.COL1_Y, "current:\t%s" % (now))
                 self.next_line += 2
                 self.screen.addstr(self.next_line, self.COL1_Y, "elapsed:\t\t    %s" % (elapsed))
+
+            if self.enable_animation:
+                self.next_line -= 1
+                if now.second % 4 == 0:
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "$-")
+                    self.next_line += 1
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "--")
+                elif now.second % 4 == 1:
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "-$")
+                    self.next_line += 1
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "--")
+                elif now.second % 4 == 2:
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "--")
+                    self.next_line += 1
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "-$")
+                elif now.second % 4 == 3:
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "--")
+                    self.next_line += 1
+                    self.screen.addstr(self.next_line, self.COL1_Y + 16, "$-")
             #sys.stdout.flush()
             self.screen.refresh()
             self.next_line = nl_store
@@ -122,10 +167,11 @@ def main():
         curses.noecho()
         curses.cbreak()
 
-        timer = stopwatch(
+        timer = Stopwatch(
                 beep_at=args.beep[0], 
                 enable_sound=args.sound, 
-                screen=stdscreen
+                screen=stdscreen,
+                enable_animation= not args.no_animation
                 )
         timer.display()
     except KeyboardInterrupt:
