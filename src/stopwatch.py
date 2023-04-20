@@ -56,6 +56,7 @@ class Stopwatch:
     screen: curses.window
     next_line = 0
     enable_animation: bool
+    old_ui: bool
     animation: Animation
 
     BUFFER_LINE = '=' * 120
@@ -63,12 +64,13 @@ class Stopwatch:
     COL1_Y = 44
     COL2_Y = 90
 
-    def __init__(self, beep_at, enable_sound, screen: curses.window, enable_animation: bool) -> None:
+    def __init__(self, beep_at, enable_sound, screen: curses.window, enable_animation: bool, old_ui: bool) -> None:
         self.screen = screen
         self.screen.addstr(0, 0, self.BUFFER_LINE)
         self.next_line += 2
         self.start_time = datetime.datetime.now().replace(microsecond=0)
         self.enable_animation = enable_animation
+        self.old_ui = old_ui
         if enable_sound:
             self.enable_sound = enable_sound
         if not beep_at <= 0:
@@ -167,11 +169,15 @@ def main():
         curses.noecho()
         curses.cbreak()
 
+        if args.legacy_ui:
+            eprint("Old UI not implemented.")
+
         timer = Stopwatch(
                 beep_at=args.beep[0], 
                 enable_sound=args.sound, 
                 screen=stdscreen,
-                enable_animation= not args.no_animation
+                enable_animation= not args.no_animation,
+                old_ui=args.legacy_ui
                 )
         timer.display()
     except KeyboardInterrupt:
