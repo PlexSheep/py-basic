@@ -1,5 +1,8 @@
 #!/bin/env python3
-import beepy    # pip install beepy
+try:
+    import beepy    # pip install beepy
+except:
+    beepy = None
 from multiprocessing import Process
 import argparse
 import time
