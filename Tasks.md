@@ -11,8 +11,10 @@ programming techniques, only how to use Python.
         - You need to explicitly tell your hash to actually process the input.
         - When printing your results, the result may be interpreted as data for characters. 
           You want the numeric value of the result in Hexadecimal.
-    - Results:
-        - ||MD5 of `foobar19` is `fa5c65d5438f849387d3fdda2be4dd65`||
+      <details>
+        <summary>Solution</summary>
+        MD5 of `foobar19` is `fa5c65d5438f849387d3fdda2be4dd65`
+      </details>
 - [ ] 1. rotate the base string `foobar` with numbers from 0 to 999999 like this:
         1.      `foobar000000`
         2.      `foobar000001`
@@ -38,14 +40,18 @@ programming techniques, only how to use Python.
         999852 | 006fe04f7d3f710f93d3e6324506154a
         999902 | 00c063364ddffa1bdf338dfcf0319424
         ```
-    - Results:
-        - ||3889 matches for the search parameters.||
+      <details>
+        <summary>Solution</summary>
+        3889 matches for the search parameters.
+      </details>
 - [ ] Continuing from the previous task, what is the earliest value for `foobarXXXXXX` (where `X`
       is a substitute for the iterating numbers) where the hash starts with `0000`?
       - Hints:
         - Stop on the earliest match.
-      - Results:
-        - || 021820 | 00001c9393b83c8da0db478687211d1d ||
+      <details>
+        <summary>Solution</summary>
+        021820 | 00001c9393b83c8da0db478687211d1d
+      </details>
 
 ## Super basic webserver
 - [ ] Make a webserver print "Schlangenjazz" when you connect to it
