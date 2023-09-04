@@ -3,6 +3,11 @@
 This document contains some tasks for Python beginners. It does not aim to teach general 
 programming techniques, only how to use Python. I try to avoid unrealistic tasks.
 
+In case you have somehow gotten this document from another source, 
+[this](https://git.cscherr.de/PlexSheep/py-basic/src/branch/master/Tasks.md) is the original 
+source, where the links should hopefully work. If something does not work feel free to contact 
+me at [software@cscherr.de](mailto:admin@cscherr.de).
+
 ## MD5 Hashchecker
 
 ### Produce a single MD5 Hash
@@ -133,7 +138,7 @@ The first hash with prefix `2718` occurs at $i=70559$.
 
 ## Super basic web server
 
-Difficulty: 2/5
+Difficulty: 3/5
 
 1. Program a Python web server that writes "Python is not so hard" in your Browser (or in `cURL`).
    Use `http.server`.
