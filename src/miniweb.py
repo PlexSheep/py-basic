@@ -2,10 +2,7 @@
 import http.server
 import io
 
-TEXT = """Hello world!
-
-If you're reading this, this web server is working!
-"""
+TEXT = "Python is not so hard"
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
     def send_head(self) -> io.BytesIO:
@@ -20,4 +17,3 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 addtrss = ("127.0.0.1", 8080)
 srv = http.server.HTTPServer(addtrss, MyHandler)
 srv.serve_forever()
-

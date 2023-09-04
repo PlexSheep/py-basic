@@ -1,57 +1,162 @@
 # Tasks for beginners
 
 This document contains some tasks for Python beginners. It does not aim to teach general 
-programming techniques, only how to use Python.
+programming techniques, only how to use Python. I try to avoid unrealistic tasks.
 
 ## MD5 Hashchecker
-- [ ] Hash `foobar19` with the md5 hashing algorithm
-    - Hints:
-        - Use Pythons `hashlib`.
-        - Your hashing function does not take strings for input, only raw data (bytes).
-        - You need to explicitly tell your hash to actually process the input.
-        - When printing your results, the result may be interpreted as data for characters. 
-          You want the numeric value of the result in Hexadecimal.
-      <details>
-        <summary>Solution</summary>
-        MD5 of `foobar19` is `fa5c65d5438f849387d3fdda2be4dd65`
-      </details>
-- [ ] 1. rotate the base string `foobar` with numbers from 0 to 999999 like this:
-        1.      `foobar000000`
-        2.      `foobar000001`
-        3.      `foobar000002`
-        ...
-        999999. `foobar999999`
-      2. Get the MD5 hash value for each of those
-      3. How many of these start with `00`?
-    - Hints:
-        - Use a for loop to do the thing X times
-        - Use Pythons string formatting to put the numbers and string together
-        - Use Options for the `%d` Placeholder to get 0 to be displayed as `000000`
-        - do the same hashing as in the previous task
-        - After hashing, check if your current hash matches the search. 
-          Print it if that is the case to see if the match is a false positive.
-        - Increment a number on each match. The value of that number after the loop is how many
-          Hashes start with `00` for this task.
-    - Testvectors, the last 5 matches:
-        ```text
-        999384 | 009671fd23fa783df1fff63516e5d115
-        999751 | 00ec2ade58f75c44b7300294497f7fb1
-        999844 | 009cfd7949b577a3311d9db3ee49c15d
-        999852 | 006fe04f7d3f710f93d3e6324506154a
-        999902 | 00c063364ddffa1bdf338dfcf0319424
-        ```
-      <details>
-        <summary>Solution</summary>
-        3889 matches for the search parameters.
-      </details>
-- [ ] Continuing from the previous task, what is the earliest value for `foobarXXXXXX` (where `X`
-      is a substitute for the iterating numbers) where the hash starts with `0000`?
-      - Hints:
-        - Stop on the earliest match.
-      <details>
-        <summary>Solution</summary>
-        021820 | 00001c9393b83c8da0db478687211d1d
-      </details>
 
-## Super basic webserver
-- [ ] Make a webserver print "Schlangenjazz" when you connect to it
+### Produce a single MD5 Hash
+
+Difficulty: 1/5
+
+1. Hash the string `foobar19` with the MD5 hashing algorithm.
+
+<details>
+<summary>Hints</summary>
+
+- Use Pythons `hashlib`.
+- Your hashing function does not take strings for input, only raw data (bytes).
+- You need to explicitly tell your hash to actually process the input.
+- When printing your results, the result may be interpreted as data for characters. 
+  You want the numeric value of the result in Hexadecimal.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+The MD5 hash of `foobar19` is `fa5c65d5438f849387d3fdda2be4dd65`.
+
+[Example Code](src/md5.py)
+
+</details>
+
+### Hash multiple values and search for specific ones.
+
+Difficulty: 2/5
+
+1. Find a way to produce strings with the basis `foobar` with appended numbers from `000000` to 
+`999999`.
+
+```text
+1.      `foobar000000`
+2.      `foobar000001`
+3.      `foobar000002`
+        ...
+999998. `foobar999998`
+999999. `foobar999999`
+```
+
+2. Hash all these with the MD5 hashing algorithm.
+3. Find the exact numbers, how many of these hashes start with `00`
+4. **Bonus**: 
+    1. If MD5 was a good / perfect Hashing algorithm (it is definitely not), 
+       how many matches for a `00` prefix should exist? Why?
+    2. How many matches for $0$ to $50000$? How many matches for $0$ to $50.000.000$?
+
+<details>
+<summary>Testvectors</summary>
+
+Last 5 Matches
+
+```text
+999384 | 009671fd23fa783df1fff63516e5d115
+999751 | 00ec2ade58f75c44b7300294497f7fb1
+999844 | 009cfd7949b577a3311d9db3ee49c15d
+999852 | 006fe04f7d3f710f93d3e6324506154a
+999902 | 00c063364ddffa1bdf338dfcf0319424
+```
+
+</details>
+<details>
+<summary>Hints</summary>
+
+- Use a for loop to do the thing X times
+- Use Pythons string formatting to put the numbers and string together
+- Use Options for the `%d` Placeholder to get $0$ to be displayed as `000000`
+- After hashing, check if your current hash matches the search. 
+  Print it if that is the case to see if the match is a false positive.
+- Increment a number on each match. The value of that number after the loop is how many
+  Hashes start with `00` for this task.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+There are 3889 hashes for `foobar000000` to `foobar999999` that start with `00`.
+
+[Code Example](src/md5range.py)
+
+**Bonus** 
+We want $N/16^2$ occurrences for an ideal hashing algorithm, where $N$ is the maximum of our range 
+$+ 1$. 
+
+$16^2$ comes from $2$ characters in a range of `0` to `e` (Hexadecimal).
+
+We want the hashing algorithm to spread out as much as possible, no value should be more common 
+than any other value. This is essential for the security of the hashing algorithm. 
+
+| Value        | Ideal Occurences |
+|--------------|------------------|
+| $1.000.000$  | $\approx 3906$   |
+| $500.000$    | $\approx 1953$   |
+| $50.000.000$ | $\approx 195312$ |
+
+</details>
+
+### Find earliest hash that fits criteria
+
+Difficulty: 2/5
+
+1. Find the earliest integer $X$ for `foobarXXXXXX` (where $X$ is an iterator as in the last 
+subtask) that starts with `2718`.
+
+<details>
+<summary>Hints</summary>
+
+- You can reuse most code from the last subtask.
+- Match against the new prefix, but stop when you find it. 
+- Display the index number in each loop iteration.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+The first hash with prefix `2718` occurs at $i=70559$.
+
+```text
+070559 | 2718e5ee6d05091ce6dad023e55ee19c
+```
+
+[Code Example](src/md5range-4.py)
+
+</details>
+
+## Super basic web server
+
+Difficulty: 2/5
+
+1. Program a Python web server that writes "Python is not so hard" in your Browser (or in `cURL`).
+   Use `http.server`.
+
+<details>
+<summary>Hints</summary>
+
+- Use `http.server.SimpleHTTPRequestHandler` and `io.BytesIO`.
+- Define your own class that inherits `SimpleHTTPRequestHandler`.
+- You don't need to implement `do_GET()`.
+- Implement your own `send_head()` method. This is the method that writes your response (not 
+  completely on it's own, but unless you feel like inspecting standard libraries, just do what 
+  I'm saying.).
+- `send_head()` should take no arguments (other than `self`) and return some readable buffer.
+- Don't forget to set the headers for HTTP before sending the body.
+- Your OS might block hosting to ports < 1000. Try to host your web server to `localhost:8080`.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+Take a look at the provided Code Example.
+
+[Code Example](src/miniweb.py)
+
+</details>
