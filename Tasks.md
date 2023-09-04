@@ -46,3 +46,6 @@ programming techniques, only how to use Python.
         - Stop on the earliest match.
       - Results:
         - || 021820 | 00001c9393b83c8da0db478687211d1d ||
+
+## Super basic webserver
+- [ ] Make a webserver print "Schlangenjazz" when you connect to it
