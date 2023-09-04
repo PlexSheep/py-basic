@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import hashlib
 BASE: str = "foobar"
 MAX = 1000000
