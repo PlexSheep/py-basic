@@ -242,7 +242,7 @@ The text is large, read it [here](data/metasyntactic.md) and find the raw text f
 
 </details>
 
-1. Use a regular expression (regex) to find all instances of a lowercase character with a 
+1. Use a regular expression (regex) to find all words that start with a lowercase character with a
 following vowel character, in which no 'x', z' or 'y' follows the vowel in the given Text.
 It is not allowed to store the text in source code, you must load it from an outside source, 
 such as a file.
@@ -252,6 +252,8 @@ Examples:
 | Original | is Match? |
 |----------|-----------|
 | foo      | yes       |
+| foobar   | yes       |
+| tayfoo   | no        |
 | baz      | no        |
 | qux      | no        |
 | Foo      | no        |
