@@ -174,6 +174,12 @@ Difficulty: 2/5
 1. Generate a string of 16 random alphanumeric characters.
 2. When starting your script, take a number for a CLI Argument. Generate a random string of this 
    length.
+3. **Bonus**
+    - How many possible strings consisting of 16 alphanumeric characters can exist?
+    - Add the possibility for a second argument `-v` that indicates your script should be more 
+      verbose.
+    - print the security bits ($log_2(L)$ where $L$ is the total number of possibilites) when the 
+      `-v` flag is applied
 
 Example:
 
@@ -197,5 +203,29 @@ n51uxDLu3BnxZ1D00gYKYRcG2jh1Y6uulHgrJ0TK3w5FtWl6wm8U0azNtxw0
 Take a look at the provided Code Example.
 
 [Code Example](src/randomString.py)
+
+**Bonus**
+
+There are 62 alphanumeric characters (A-Z), (a-z), (0-9).
+
+With $N$ characters, there are $62^N$ possible variants.
+For $N=16$ that's $62^{16} = 47.672.401.706.823.533.450.263.330.816$ possible variants.
+
+Security people measure security in Bits ($2^x$). You can calculate the bits of security with the 
+logarithm base 2.
+
+$S = log_2(62^N)$. 
+
+We can immediately see that longer passwords are *exponentially* more secure than
+more complex passwords (passwords that make use of complicated characters). For each bit, the 
+security of the password is doubled.
+
+For our example of $N=16$ we can calculate the security of the password like this:
+
+$S=log_2(62^{16}) \approx 95.27$
+
+That number of security bits is pretty good for passwords. However it does not cost you anything to 
+just make your passwords longer than that, and give attackers no chance to break them by brute 
+force.
 
 </details>
