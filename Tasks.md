@@ -87,7 +87,8 @@ Last 5 Matches
 <details>
 <summary>Solution</summary>
 
-There are 3889 hashes for `foobar000000` to `foobar999999` that start with `00`.
+There are 3889 hashes for `foobar000000` to `foobar999999` that produce an MD5 Hash that starts 
+with `00`.
 
 [Code Example](src/md5range.py)
 
@@ -113,7 +114,7 @@ than any other value. This is essential for the security of the hashing algorith
 Difficulty: 2/5
 
 1. Find the earliest integer $X$ for `foobarXXXXXX` (where $X$ is an iterator as in the last 
-subtask) that starts with `2718`.
+subtask) that produces an MD5 hash that starts with `2718`.
 
 <details>
 <summary>Hints</summary>
