@@ -1,3 +1,6 @@
+Note: This is the Wikipedia page for metasyntactic variables in English, 2023-09-05. Find the
+up to date original [here](https://en.wikipedia.org/wiki/Metasyntactic_variable).
+
 # Metasyntactic variable
 
 ## Tools

@@ -238,11 +238,11 @@ Difficulty: 2/5
 <summary>Text</summary>
 
 The text is large, read it [here](data/metasyntactic.md) and find the raw text for your program 
-[here]().
+[here](https://git.cscherr.de/PlexSheep/py-basic/raw/branch/master/data/metasyntactic.md).
 
 </details>
 
-1. Use a regular expression (regex) to find all instances of a uppercase character with a 
+1. Use a regular expression (regex) to find all instances of a lowercase character with a 
 following vowel character, in which no 'x', z' or 'y' follows the vowel in the given Text.
 It is not allowed to store the text in a variable, you must load it from an outside source, such as
 a file.
@@ -251,11 +251,12 @@ Examples:
 
 | Original | is Match? |
 |----------|-----------|
-| Foo      | yes       |
-| Baz      | no        |
-| Qux      | no        |
-| foo      | no        |
-| BAR      | yes       |
+| foo      | yes       |
+| baz      | no        |
+| qux      | no        |
+| Foo      | no        |
+| bAR      | yes       |
+| far      | yes       |
 
 A hint that you don't want to miss: use [regex101.com](https://regex101.com) if you are not already
 a REGEX expert.
