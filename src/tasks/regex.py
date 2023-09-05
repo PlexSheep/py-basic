@@ -13,6 +13,6 @@ regex = r"\b[a-z][AEIOUaeiou]([a-w]|[A-W])"
 matches = re.finditer(regex, text, re.MULTILINE)
 counter = 0
 for i, match in enumerate(matches, start=1):
-    #print(f"{i:03} | \"{match.string}\"")
+    print(f"{i:03} | \"{match}\"")
     counter += 1
 print(f"found {counter}.")

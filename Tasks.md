@@ -267,12 +267,23 @@ Use [regex101.com](https://regex101.com) if you are not already a REGEX expert.
 <details>
 <summary>Hints</summary>
 
-TODO
+- use `open()` to open your file for reading.
+- use the `read()` method to read the file out.
+- Use the `re` library
+- Use `\b` to match a word boundary
+- Use ranges `[5-9]`
+- You can set a higher precedence by putting things in braces `(ABC)`.
+- You can connect two expressions with `A|B` to use either `A` or `B`
+- Use global mode.
 
 </details>
 <details>
 <summary>Solution</summary>
 
-TODO
+There should be $374$ matches.
+
+A regex that fullfills the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
+
+[Code Example](src/tasks/regex.py)
 
 </details>
