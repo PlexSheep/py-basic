@@ -10,7 +10,7 @@ me at [software@cscherr.de](mailto:admin@cscherr.de).
 
 ## MD5 Hashchecker
 
-### Produce a single MD5 Hash
+### A. Produce a single MD5 Hash
 
 Difficulty: 1/5
 
@@ -35,7 +35,7 @@ The MD5 hash of `foobar19` is `fa5c65d5438f849387d3fdda2be4dd65`.
 
 </details>
 
-### Hash multiple values and search for specific ones.
+### B. Hash multiple values and search for specific ones.
 
 Difficulty: 2/5
 
@@ -109,7 +109,7 @@ than any other value. This is essential for the security of the hashing algorith
 
 </details>
 
-### Find earliest hash that fits criteria
+### C. Find earliest hash that fits criteria
 
 Difficulty: 2/5
 
