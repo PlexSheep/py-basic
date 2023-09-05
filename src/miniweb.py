@@ -14,6 +14,10 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
 
         return io.BytesIO(body)
 
-addtrss = ("127.0.0.1", 8080)
-srv = http.server.HTTPServer(addtrss, MyHandler)
+address = ("127.0.0.1", 8080)
+srv = http.server.HTTPServer(address, MyHandler)
 srv.serve_forever()
+
+# To query your web server go to http://localhost:8080
+# OR from CLI and with headers:
+# $ curl localhost:8080 -v 
