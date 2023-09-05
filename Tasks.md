@@ -166,3 +166,36 @@ Take a look at the provided Code Example.
 [Code Example](src/miniweb.py)
 
 </details>
+
+## Random Password generator
+
+Difficulty: 2/5
+
+1. Generate a string of 16 random alphanumeric characters.
+2. When starting your script, take a number for a CLI Argument. Generate a random string of this 
+   length.
+
+Example:
+
+```bash
+$ python ./randomString.py 60
+n51uxDLu3BnxZ1D00gYKYRcG2jh1Y6uulHgrJ0TK3w5FtWl6wm8U0azNtxw0
+# ^^^^ the above is 60 characters ^^^^
+```
+
+<details>
+<summary>Hints</summary>
+
+- Use `random.choice` to generate a random character
+- build your own alphabet string
+- Use `sys.argv` to access the CLI Arguments
+
+</details>
+<details>
+<summary>Solution</summary>
+
+Take a look at the provided Code Example.
+
+[Code Example](src/randomString.py)
+
+</details>
