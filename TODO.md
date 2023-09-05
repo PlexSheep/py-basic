@@ -1,4 +1,10 @@
-# Things i would like to add to this repository
-Caesar-encryption, decryption, brute force
-calculate determinante (german, idk the english word) of a matrix
+# Things that tasks would be cool
 
+## Kryptography
+- [ ] Caesar-encryption, decryption, brute force
+
+## Math
+- [ ] calculate determinant of a matrix
+
+## General Tech
+- [ ] Regex

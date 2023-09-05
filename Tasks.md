@@ -229,3 +229,56 @@ just make your passwords longer than that, and give attackers no chance to break
 force.
 
 </details>
+
+## String Parsing with Regular Expressions
+
+Difficulty: 2/5
+
+<details>
+<summary>Text</summary>
+
+The text is large, read it [here](data/metasyntactic.md) and find the raw text for your program 
+[here]().
+
+</details>
+
+1. Use a regular expression (regex) to find all instances of a uppercase character with a 
+following vowel character, in which no 'x', z' or 'y' follows the vowel in the given Text.
+It is not allowed to store the text in a variable, you must load it from an outside source, such as
+a file.
+
+Examples:
+
+| Original | is Match? |
+|----------|-----------|
+| Foo      | yes       |
+| Baz      | no        |
+| Qux      | no        |
+| foo      | no        |
+| BAR      | yes       |
+
+A hint that you don't want to miss: use [regex101.com](https://regex101.com) if you are not already
+a REGEX expert.
+
+<details>
+<summary>Hints</summary>
+
+- Use `http.server.SimpleHTTPRequestHandler` and `io.BytesIO`.
+- Define your own class that inherits `SimpleHTTPRequestHandler`.
+- You don't need to implement `do_GET()`.
+- Implement your own `send_head()` method. This is the method that writes your response (not 
+  completely on it's own, but unless you feel like inspecting standard libraries, just do what 
+  I'm saying.).
+- `send_head()` should take no arguments (other than `self`) and return some readable buffer.
+- Don't forget to set the headers for HTTP before sending the body.
+- Your OS might block hosting to ports < 1000. Try to host your web server to `localhost:8080`.
+
+</details>
+<details>
+<summary>Solution</summary>
+
+Take a look at the provided Code Example.
+
+[Code Example](src/miniweb.py)
+
+</details>
