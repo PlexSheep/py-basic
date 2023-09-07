@@ -282,9 +282,50 @@ Use [regex101.com](https://regex101.com) if you are not already a REGEX expert.
 
 There should be $374$ matches.
 
-A regex that fullfills the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
+A regex that matches the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
 
 [Code Example](src/tasks/regex.py)
+
+</details>
+
+## Ancient Cryptography
+
+Difficulty: 2/5
+
+<details>
+<summary>Text</summary>
+
+```text
+Neovim is a refactor, and sometimes redactor, in the tradition of Vim (which itself derives from 
+Stevie). It is not a rewrite but a continuation and extension of Vim. Many clones and derivatives 
+exist, some very clever—but none are Vim. Neovim is built for users who want the good parts of 
+Vim, and more. 
+````
+
+</details>
+
+1. The text above has been cyphered with the Caesar cipher, a timeless classic
+   algorithm to abstract the meaning away from a text and arguably an early
+   form of encryption. Your task is to decipher it back into readable text.
+
+### The Caesar cipher
+
+For the Caesar cipher, all letters are shifted by the value of the key.
+
+**Examples**
+
+`foo Bar` becomes `gpp Cbs` when shifted by $1$.
+
+
+
+<details>
+<summary>Hints</summary>
+
+</details>
+<details>
+<summary>Solution</summary>
+
+[Code Example](src/caesar.py)
 
 </details>
 
@@ -316,7 +357,7 @@ Difficulty: 2/5
 
 
 1. Dump the data of [data/metasyntactic.md](./data/metasyntactic.md) -- In
-   Hexadecumal.
+   Hexadecimal.
 2. Make the dumped Bytes look pretty, something like the example below:
 
 <details>
@@ -347,18 +388,4 @@ Line      Data
 0000110 ┃ 6d20 7465 7361 6e79 6174 7463 6369 7620
 ...
 ```
-
-<details>
-<summary>Hints</summary>
-
-TODO: add hints
-
-</details>
-<details>
-<summary>Solution</summary>
-
-TODO: formulate solution text
-
-[Code Example](src/tasks/hexdumper-a.py)
-
 </details>
