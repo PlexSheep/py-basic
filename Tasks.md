@@ -398,13 +398,13 @@ use `ed`.).
 Note: If you're looking for a great, fully featured hexeditor, I'd recommend
 `bvi` ("binary vi"), which is packaged by most distributions.
 
--> `apt-get install bvi`
+-> `apt-get install bvi` <-
 
 Note: I have no Idea how to install a python script as executable on windows, I
 don't like windows either, so no support for installing stuff on windows.
 
 ### A. Hexdumper
-Difficulty: 2/5
+Difficulty: 3/5
 
 
 1. Dump the data of [data/metasyntactic.md](./data/metasyntactic.md) -- In
