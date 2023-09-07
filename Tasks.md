@@ -282,8 +282,51 @@ Use [regex101.com](https://regex101.com) if you are not already a REGEX expert.
 
 There should be $374$ matches.
 
-A regex that fullfills the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
+A regex that matches the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
 
 [Code Example](src/tasks/regex.py)
+
+</details>
+
+## Ancient Cryptography
+
+Difficulty: 2/5
+
+<details>
+<summary>Text</summary>
+
+```text
+Neovim is a refactor, and sometimes redactor, in the tradition of Vim (which itself derives from 
+Stevie). It is not a rewrite but a continuation and extension of Vim. Many clones and derivatives 
+exist, some very clever—but none are Vim. Neovim is built for users who want the good parts of 
+Vim, and more. 
+````
+
+</details>
+
+1. The text above has been cyphered with the Caesar cipher, a timeless classic
+   algorithm to abstract the meaning away from a text and arguably an early
+   form of encryption. Your task is to decipher it back into readable text.
+
+### The caesar cipher
+
+For the caesar cipher, all letters are shifted by the value of the key.
+
+**Examples**
+
+"foo Bar" becomes "gpp Cbs" when shifted by $1$.
+
+
+
+<details>
+<summary>Hints</summary>
+
+
+</details>
+<details>
+<summary>Solution</summary>
+
+
+[Code Example](src/caesar.py)
 
 </details>
