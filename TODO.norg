@@ -1,0 +1,15 @@
+This is a list of tasks that would be cool to add.
+
+* Tasks
+** Basic
+*** Files
+		- ( ) Hex dumper
+*** Networking
+		- ( ) Mini curl
+*** Packaging
+		- ( ) Installing a package to your system
+		- ( ) Building a library
+
+** Cryptography
+*** Signature
+		- ( ) Check a signature with OpenSSL

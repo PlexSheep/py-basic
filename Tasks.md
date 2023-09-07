@@ -1,11 +1,11 @@
 # Tasks for beginners
 
-This document contains some tasks for Python beginners. It does not aim to teach general 
+This document contains some tasks for Python beginners. It does not aim to teach general
 programming techniques, only how to use Python. I try to avoid unrealistic tasks.
 
-In case you have somehow gotten this document from another source, 
-[this](https://git.cscherr.de/PlexSheep/py-basic/src/branch/master/Tasks.md) is the original 
-source, where the links should hopefully work. If something does not work feel free to contact 
+In case you have somehow gotten this document from another source,
+[this](https://git.cscherr.de/PlexSheep/py-basic/src/branch/master/Tasks.md) is the original
+source, where the links should hopefully work. If something does not work feel free to contact
 me at [software@cscherr.de](mailto:admin@cscherr.de).
 
 ## MD5 Hashchecker
@@ -22,7 +22,7 @@ Difficulty: 1/5
 - Use Pythons `hashlib`.
 - Your hashing function does not take strings for input, only raw data (bytes).
 - You need to explicitly tell your hash to actually process the input.
-- When printing your results, the result may be interpreted as data for characters. 
+- When printing your results, the result may be interpreted as data for characters.
   You want the numeric value of the result in Hexadecimal.
 
 </details>
@@ -39,7 +39,7 @@ The MD5 hash of `foobar19` is `fa5c65d5438f849387d3fdda2be4dd65`.
 
 Difficulty: 2/5
 
-1. Find a way to produce strings with the basis `foobar` with appended numbers from `000000` to 
+1. Find a way to produce strings with the basis `foobar` with appended numbers from `000000` to
 `999999`.
 
 ```text
@@ -53,8 +53,8 @@ Difficulty: 2/5
 
 2. Hash all these with the MD5 hashing algorithm.
 3. Find the exact numbers, how many of these hashes start with `00`
-4. **Bonus**: 
-    1. If MD5 was a good / perfect Hashing algorithm (it is definitely not), 
+4. **Bonus**:
+    1. If MD5 was a good / perfect Hashing algorithm (it is definitely not),
        how many matches for a `00` prefix should exist? Why?
     2. How many matches for $0$ to $50000$? How many matches for $0$ to $50.000.000$?
 
@@ -78,7 +78,7 @@ Last 5 Matches
 - Use a for loop to do the thing X times
 - Use Pythons string formatting to put the numbers and string together
 - Use Options for the `%d` Placeholder to get $0$ to be displayed as `000000`
-- After hashing, check if your current hash matches the search. 
+- After hashing, check if your current hash matches the search.
   Print it if that is the case to see if the match is a false positive.
 - Increment a number on each match. The value of that number after the loop is how many
   Hashes start with `00` for this task.
@@ -87,19 +87,19 @@ Last 5 Matches
 <details>
 <summary>Solution</summary>
 
-There are 3889 hashes for `foobar000000` to `foobar999999` that produce an MD5 Hash that starts 
+There are 3889 hashes for `foobar000000` to `foobar999999` that produce an MD5 Hash that starts
 with `00`.
 
 [Code Example](src/md5range.py)
 
-**Bonus** 
-We want $N/16^2$ occurrences for an ideal hashing algorithm, where $N$ is the maximum of our range 
-$+ 1$. 
+**Bonus**
+We want $N/16^2$ occurrences for an ideal hashing algorithm, where $N$ is the maximum of our range
+$+ 1$.
 
 $16^2$ comes from $2$ characters in a range of `0` to `e` (Hexadecimal).
 
-We want the hashing algorithm to spread out as much as possible, no value should be more common 
-than any other value. This is essential for the security of the hashing algorithm. 
+We want the hashing algorithm to spread out as much as possible, no value should be more common
+than any other value. This is essential for the security of the hashing algorithm.
 
 | Value        | Ideal Occurences |
 |--------------|------------------|
@@ -113,14 +113,14 @@ than any other value. This is essential for the security of the hashing algorith
 
 Difficulty: 2/5
 
-1. Find the earliest integer $X$ for `foobarXXXXXX` (where $X$ is an iterator as in the last 
+1. Find the earliest integer $X$ for `foobarXXXXXX` (where $X$ is an iterator as in the last
 subtask) that produces an MD5 hash that starts with `2718`.
 
 <details>
 <summary>Hints</summary>
 
 - You can reuse most code from the last subtask.
-- Match against the new prefix, but stop when you find it. 
+- Match against the new prefix, but stop when you find it.
 - Display the index number in each loop iteration.
 
 </details>
@@ -150,8 +150,8 @@ Difficulty: 3/5
 - Use `http.server.SimpleHTTPRequestHandler` and `io.BytesIO`.
 - Define your own class that inherits `SimpleHTTPRequestHandler`.
 - You don't need to implement `do_GET()`.
-- Implement your own `send_head()` method. This is the method that writes your response (not 
-  completely on it's own, but unless you feel like inspecting standard libraries, just do what 
+- Implement your own `send_head()` method. This is the method that writes your response (not
+  completely on it's own, but unless you feel like inspecting standard libraries, just do what
   I'm saying.).
 - `send_head()` should take no arguments (other than `self`) and return some readable buffer.
 - Don't forget to set the headers for HTTP before sending the body.
@@ -172,13 +172,13 @@ Take a look at the provided Code Example.
 Difficulty: 2/5
 
 1. Generate a string of 16 random alphanumeric characters.
-2. When starting your script, take a number for a CLI Argument. Generate a random string of this 
+2. When starting your script, take a number for a CLI Argument. Generate a random string of this
    length.
 3. **Bonus**
     - How many possible strings consisting of 16 alphanumeric characters can exist?
-    - Add the possibility for a second argument `-v` that indicates your script should be more 
+    - Add the possibility for a second argument `-v` that indicates your script should be more
       verbose.
-    - print the security bits ($log_2(L)$ where $L$ is the total number of possibilites) when the 
+    - print the security bits ($log_2(L)$ where $L$ is the total number of possibilities) when the
       `-v` flag is applied
 
 Example:
@@ -211,21 +211,21 @@ There are 62 alphanumeric characters (A-Z), (a-z), (0-9).
 With $N$ characters, there are $62^N$ possible variants.
 For $N=16$ that's $62^{16} = 47.672.401.706.823.533.450.263.330.816$ possible variants.
 
-Security people measure security in Bits ($2^x$). You can calculate the bits of security with the 
+Security people measure security in Bits ($2^x$). You can calculate the bits of security with the
 logarithm base 2.
 
-$S = log_2(62^N)$. 
+$S = log_2(62^N)$.
 
 We can immediately see that longer passwords are *exponentially* more secure than
-more complex passwords (passwords that make use of complicated characters). For each bit, the 
+more complex passwords (passwords that make use of complicated characters). For each bit, the
 security of the password is doubled.
 
 For our example of $N=16$ we can calculate the security of the password like this:
 
 $S=log_2(62^{16}) \approx 95.27$
 
-That number of security bits is pretty good for passwords. However it does not cost you anything to 
-just make your passwords longer than that, and give attackers no chance to break them by brute 
+That number of security bits is pretty good for passwords. However it does not cost you anything to
+just make your passwords longer than that, and give attackers no chance to break them by brute
 force.
 
 </details>
@@ -237,14 +237,14 @@ Difficulty: 2/5
 <details>
 <summary>Text</summary>
 
-The text is large, read it [here](data/metasyntactic.md) and find the raw text for your program 
+The text is large, read it [here](data/metasyntactic.md) and find the raw text for your program
 [here](https://git.cscherr.de/PlexSheep/py-basic/raw/branch/master/data/metasyntactic.md).
 
 </details>
 
 1. Use a regular expression (regex) to find all words that start with a lowercase character with a
 following vowel character, in which no 'x', z' or 'y' follows the vowel in the given Text.
-It is not allowed to store the text in source code, you must load it from an outside source, 
+It is not allowed to store the text in source code, you must load it from an outside source,
 such as a file.
 
 Examples:
@@ -260,7 +260,7 @@ Examples:
 | bAR      | yes       |
 | far      | yes       |
 
-A hint that you don't want to miss: 
+A hint that you don't want to miss:
 
 Use [regex101.com](https://regex101.com) if you are not already a REGEX expert.
 
@@ -285,5 +285,80 @@ There should be $374$ matches.
 A regex that fullfills the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
 
 [Code Example](src/tasks/regex.py)
+
+</details>
+
+## Making a Hexeditor
+
+In this section, we're building a little hexeditor. You will be able to install
+it on your system and use it instead of the `hexdump` and `xxd` built into most 
+Linux distributions.
+
+Hexdumping is actually really simple, all you have to do is read a file and
+print it's direct content interpreted as numbers in hexadecimal. Apply some
+fancy string formatting and we're done!
+
+The editing part is a lot harder. It requires us to build a functioning TUI -
+Terminal User Interface, as working with command line arguments or regular
+reading from stdin won't help us much for editing a file. (if that's your thing,
+use `ed`.).
+
+Note: If you're looking for a great, fully featured hexeditor, I'd recommend
+`bvi` ("binary vi"), which is packaged by most distributions.
+
+-> `apt-get install bvi`
+
+Note: I have no Idea how to install a python script as executable on windows, I
+don't like windows either, so no support for installing stuff on windows.
+
+### A. Hexdumper
+Difficulty: 2/5
+
+
+1. Dump the data of [data/metasyntactic.md](./data/metasyntactic.md) -- In
+   Hexadecumal.
+2. Make the dumped Bytes look pretty, something like the example below:
+
+<details>
+    <summary>Hexdump Example Display</summary>
+
+`data/metasyntactic.md` looks like this when hexdumped:
+
+```text
+Line      Data
+=================================================
+0000000 ┃ 6f4e 6574 203a 6854 7369 6920 2073 6874
+0000010 ┃ 2065 6957 696b 6570 6964 2061 6170 6567
+0000020 ┃ 6620 726f 6d20 7465 7361 6e79 6174 7463
+0000030 ┃ 6369 7620 7261 6169 6c62 7365 6920 206e
+0000040 ┃ 6e45 6c67 7369 2c68 3220 3230 2d33 3930
+0000050 ┃ 302d 2e35 4620 6e69 2064 6874 0a65 7075
+0000060 ┃ 7420 206f 6164 6574 6f20 6972 6967 616e
+0000070 ┃ 206c 685b 7265 5d65 6828 7474 7370 2f3a
+0000080 ┃ 652f 2e6e 6977 696b 6570 6964 2e61 726f
+0000090 ┃ 2f67 6977 696b 4d2f 7465 7361 6e79 6174
+00000a0 ┃ 7463 6369 765f 7261 6169 6c62 2965 0a2e
+00000b0 ┃ 230a 4d20 7465 7361 6e79 6174 7463 6369
+00000c0 ┃ 7620 7261 6169 6c62 0a65 230a 2023 6f54
+00000d0 ┃ 6c6f 0a73 460a 6f72 206d 6957 696b 6570
+00000e0 ┃ 6964 2c61 7420 6568 6620 6572 2065 6e65
+00000f0 ┃ 7963 6c63 706f 6465 6169 540a 6968 2073
+0000100 ┃ 7261 6974 6c63 2065 7369 6120 6f62 7475
+0000110 ┃ 6d20 7465 7361 6e79 6174 7463 6369 7620
+...
+```
+
+<details>
+<summary>Hints</summary>
+
+TODO: add hints
+
+</details>
+<details>
+<summary>Solution</summary>
+
+TODO: formulate solution text
+
+[Code Example](src/tasks/hexdumper-a.py)
 
 </details>
