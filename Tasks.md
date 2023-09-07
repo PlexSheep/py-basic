@@ -288,7 +288,13 @@ A regex that matches the requirements is `\b[a-z][AEIOUaeiou]([a-w]|[A-W])`.
 
 </details>
 
-## Ancient Cryptography
+## Primitive Cryptography
+
+This section covers some ancient and / or primitive methods of Cryptography.
+These are relatively easy to code and give a basic understanding of used
+concepts.
+
+### A. The Caesar Cipher
 
 Difficulty: 2/5
 
@@ -296,19 +302,23 @@ Difficulty: 2/5
 <summary>Text</summary>
 
 ```text
-Neovim is a refactor, and sometimes redactor, in the tradition of Vim (which itself derives from 
-Stevie). It is not a rewrite but a continuation and extension of Vim. Many clones and derivatives 
-exist, some very clever—but none are Vim. Neovim is built for users who want the good parts of 
-Vim, and more. 
+Gxhobf bl t kxytvmhk, tgw lhfxmbfxl kxwtvmhk, bg max mktwbmbhg hy Obf (pabva bmlxey wxkboxl ykhf
+Lmxobx). Bm bl ghm t kxpkbmx unm t vhgmbgntmbhg tgw xqmxglbhg hy Obf. Ftgr vehgxl tgw wxkbotmboxl
+xqblm, lhfx oxkr vexoxk—unm ghgx tkx Obf. Gxhobf bl unbem yhk nlxkl pah ptgm max zhhw itkml hy
+Obf, tgw fhkx.
 ````
 
 </details>
 
-1. The text above has been cyphered with the Caesar cipher, a timeless classic
-   algorithm to abstract the meaning away from a text and arguably an early
-   form of encryption. Your task is to decipher it back into readable text.
+1. The text above has been cyphered with the Caesar cipher, a timeless,
+   classical algorithm that abstracts the meaning of text away and arguably
+   an early form of encryption. Your task is to decipher it back into readable
+   text.
+2. **Bonus**
+    - What if you didn't just try all possible combinations? How could you find
+        the key without trying until you find it?
 
-### The Caesar cipher
+**The cipher**
 
 For the Caesar cipher, all letters are shifted by the value of the key.
 
@@ -316,23 +326,64 @@ For the Caesar cipher, all letters are shifted by the value of the key.
 
 `foo Bar` becomes `gpp Cbs` when shifted by $1$.
 
-
+Try to find out the rest for yourself.
 
 <details>
 <summary>Hints</summary>
+
+- You can use the `ascii` codes of the letters to your advantage.
+- You need to distinguish between lower and upper case.
+- To roll back from back from a too high index back into the range of real
+    letters. To do that you can use the modulo operation, which computes the
+    remainder of a division by x. This is actually finite field arithmetic,
+    but don't get so deep into the math.
+- It is handy to have a command line argument for key and source text.
 
 </details>
 <details>
 <summary>Solution</summary>
 
+I ciphered the text with the key $19$. The original, deciphered text is:
+
+<details>
+<summary>Text</summary>
+
+```text
+Neovim is a refactor, and sometimes redactor, in the tradition of Vim (which itself derives from
+Stevie). It is not a rewrite but a continuation and extension of Vim. Many clones and derivatives
+exist, some very clever—but none are Vim. Neovim is built for users who want the good parts of
+Vim, and more.
+````
+
+</details>
+
+To decipher, you just apply the shifting of number backwards, or with the key
+$-19$ (that's the same thing!).
+
 [Code Example](src/caesar.py)
+
+**Bonus**
+One other way you could try to *recover* the key with is by statistical
+analysis. Western languages (like English, German, etc.) have some letters,
+words, combinations of letters, that are more common than others. These follow
+a [statistical distribution](https://en.wikipedia.org/wiki/Letter_frequency).
+The letter that is by far the most common in English is `e`.
+
+With this information, you could count the occurrences for each letter and find
+that the graph of frequencies looks the same -- only shifted by a couple
+letters. That difference is your key.
+
+Another way to try to recover the key is by looking at obvious words. The second
+word in the cipher text is a single `t`. How many (common) words do you know
+that only have one letter? I only know `a`. If we calculate the difference,
+again, we get $19$, which is the key.
 
 </details>
 
 ## Making a Hexeditor
 
 In this section, we're building a little hexeditor. You will be able to install
-it on your system and use it instead of the `hexdump` and `xxd` built into most 
+it on your system and use it instead of the `hexdump` and `xxd` built into most
 Linux distributions.
 
 Hexdumping is actually really simple, all you have to do is read a file and
