@@ -406,37 +406,84 @@ don't like windows either, so no support for installing stuff on windows.
 ### A. Hexdumper
 Difficulty: 3/5
 
-
 1. Dump the data of [data/metasyntactic.md](./data/metasyntactic.md) -- In
    Hexadecimal.
 2. Make the dumped Bytes look pretty, something like the example below:
+3. Make use of command line arguments to add a help option (triggered with `-h` or
+   `--help`) and a `-C` or `--chars` option that adds another section that
+   prints the bytes interpreted as text. Those bytes that have no text
+   representation should be displayed as `.`. You may use the `argparse` library
+   to work with the arguments.
 
 <details>
     <summary>Hexdump Example Display</summary>
 
-`data/metasyntactic.md` looks like this when hexdumped:
+`data/metasyntactic.md` should look like this when hexdumped:
 
 ```text
 Line      Data
 =================================================
-0000000 ┃ 6f4e 6574 203a 6854 7369 6920 2073 6874
-0000010 ┃ 2065 6957 696b 6570 6964 2061 6170 6567
-0000020 ┃ 6620 726f 6d20 7465 7361 6e79 6174 7463
-0000030 ┃ 6369 7620 7261 6169 6c62 7365 6920 206e
-0000040 ┃ 6e45 6c67 7369 2c68 3220 3230 2d33 3930
-0000050 ┃ 302d 2e35 4620 6e69 2064 6874 0a65 7075
-0000060 ┃ 7420 206f 6164 6574 6f20 6972 6967 616e
-0000070 ┃ 206c 685b 7265 5d65 6828 7474 7370 2f3a
-0000080 ┃ 652f 2e6e 6977 696b 6570 6964 2e61 726f
-0000090 ┃ 2f67 6977 696b 4d2f 7465 7361 6e79 6174
-00000a0 ┃ 7463 6369 765f 7261 6169 6c62 2965 0a2e
-00000b0 ┃ 230a 4d20 7465 7361 6e79 6174 7463 6369
-00000c0 ┃ 7620 7261 6169 6c62 0a65 230a 2023 6f54
-00000d0 ┃ 6c6f 0a73 460a 6f72 206d 6957 696b 6570
-00000e0 ┃ 6964 2c61 7420 6568 6620 6572 2065 6e65
-00000f0 ┃ 7963 6c63 706f 6465 6169 540a 6968 2073
-0000100 ┃ 7261 6974 6c63 2065 7369 6120 6f62 7475
-0000110 ┃ 6d20 7465 7361 6e79 6174 7463 6369 7620
+0000000 | 6f4e 6574 203a 6854 7369 6920 2073 6874
+0000010 | 2065 6957 696b 6570 6964 2061 6170 6567
+0000020 | 6620 726f 6d20 7465 7361 6e79 6174 7463
+0000030 | 6369 7620 7261 6169 6c62 7365 6920 206e
+0000040 | 6e45 6c67 7369 2c68 3220 3230 2d33 3930
+0000050 | 302d 2e35 4620 6e69 2064 6874 0a65 7075
+0000060 | 7420 206f 6164 6574 6f20 6972 6967 616e
+0000070 | 206c 685b 7265 5d65 6828 7474 7370 2f3a
+0000080 | 652f 2e6e 6977 696b 6570 6964 2e61 726f
+0000090 | 2f67 6977 696b 4d2f 7465 7361 6e79 6174
+00000a0 | 7463 6369 765f 7261 6169 6c62 2965 0a2e
+00000b0 | 230a 4d20 7465 7361 6e79 6174 7463 6369
+00000c0 | 7620 7261 6169 6c62 0a65 230a 2023 6f54
+00000d0 | 6c6f 0a73 460a 6f72 206d 6957 696b 6570
+00000e0 | 6964 2c61 7420 6568 6620 6572 2065 6e65
+00000f0 | 7963 6c63 706f 6465 6169 540a 6968 2073
+0000100 | 7261 6974 6c63 2065 7369 6120 6f62 7475
+0000110 | 6d20 7465 7361 6e79 6174 7463 6369 7620
+...
+```
+
+And like this when hexdumped with `-C`:
+
+```text
+Line      Data                                     Text
+======================================================================
+0000000 | 6f4e 6574 203a 6854 7369 6920 2073 6874 |Note: This is th|
+0000010 | 2065 6957 696b 6570 6964 2061 6170 6567 |e Wikipedia page|
+0000020 | 6620 726f 6d20 7465 7361 6e79 6174 7463 | for metasyntact|
+0000030 | 6369 7620 7261 6169 6c62 7365 6920 206e |ic variables in |
+0000040 | 6e45 6c67 7369 2c68 3220 3230 2d33 3930 |English, 2023-09|
+0000050 | 302d 2e35 4620 6e69 2064 6874 0a65 7075 |-05. Find the.up|
+0000060 | 7420 206f 6164 6574 6f20 6972 6967 616e | to date origina|
+0000070 | 206c 685b 7265 5d65 6828 7474 7370 2f3a |l [here](https:/|
+0000080 | 652f 2e6e 6977 696b 6570 6964 2e61 726f |/en.wikipedia.or|
+0000090 | 2f67 6977 696b 4d2f 7465 7361 6e79 6174 |g/wiki/Metasynta|
+00000a0 | 7463 6369 765f 7261 6169 6c62 2965 0a2e |ctic_variable)..|
+00000b0 | 230a 4d20 7465 7361 6e79 6174 7463 6369 |.# Metasyntactic|
+00000c0 | 7620 7261 6169 6c62 0a65 230a 2023 6f54 | variable..## To|
+00000d0 | 6c6f 0a73 460a 6f72 206d 6957 696b 6570 |ols..From Wikipe|
+00000e0 | 6964 2c61 7420 6568 6620 6572 2065 6e65 |dia, the free en|
+00000f0 | 7963 6c63 706f 6465 6169 540a 6968 2073 |cyclopedia.This |
 ...
 ```
 </details>
+
+<details>
+<summary>Hints</summary>
+
+
+
+</details>
+
+<details>
+<summary>Solution</summary>
+
+[Code Example](./src/hexdumper.py)
+
+</details>
+
+### B. Packaging your hexdumper
+
+1. Install `pip`, on debian based systems you can do that with `apt-get install
+   python3-pip`.

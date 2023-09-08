@@ -3,7 +3,12 @@ This is a list of tasks that would be cool to add.
 * Tasks
 ** Basic
 *** Files
-		- ( ) Hex dumper
+		- (-) Hex dumper
+			- (x) Dump basic files with format
+			- (x) Dump basic files with chars
+			- (x) Be able to dump larger files or put out an error
+			- ( ) Stop reading when read gets blocked /somehow/
+			- ( ) Install script to system
 *** Networking
 		- ( ) Mini curl
 *** Packaging
