@@ -32,7 +32,7 @@ def main():
     """Dump a file"""
     # arg parsing
     parser = argparse.ArgumentParser(
-        prog="hexer",
+        prog="hd",
         description="Dumps data as hex"
     )
     parser.add_argument("file")
