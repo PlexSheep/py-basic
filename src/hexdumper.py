@@ -2,6 +2,7 @@
 import argparse
 import os
 import sys
+import fcntl    # only for non blocking IO, if you dont know what it is, you can ignore it or study up
 
 # 2**30 bytes aka 1 Mebibyte
 MAX_SIZE: int = 0x100000
@@ -40,7 +41,35 @@ def main():
 
     # open file
     try:
-        file = open(args.file, "rb")
+        # Tl;Dr, use this unless you want to do some lower level stuff
+        # vvvvvvvvvvvvvvvvvvvvvvvvvvvvv
+        #file = open(args.file, "rb")
+
+
+        # the above is sufficient for most regular uses
+        #
+        # some "files" are "lazy" and block the reading process until they have
+        # content, like network connections, fifos, sockets, and so on.
+
+        # the following is a lower level approach to handling these. We
+        # basically call a part of the libc, telling it to open the file
+        # nonblocking. If something blocks, it will simply refuse.
+        #
+        # as far as i know, this only works on UNIX (like) systems. Windows
+        # is the only major exception.
+
+        # make a syscall that will open our file in readonly mode, nonblocking.
+        # if it did not exist and we write to it, it would be created with the
+        # perms: 644 (like `chmod 644 myfile`)
+        fd = os.open(args.file, os.O_RDONLY | os.O_NONBLOCK, mode=0o644) 
+        # now we make the fd into the high level python class `file`
+        file = os.fdopen(fd, "rb")
+        # i read somewhere that file.readline() does not work like this, but as
+        # we are reading binary data anyways, I don't care.
+        # check if the file is readable
+        if not file.peek(1):
+            print("File is blocked, trying to wait...")
+            file = open(args.file, "rb")
     except Exception as e:
         print(f"Could not open file '{args.file}': {e}")
         sys.exit(1)
@@ -99,6 +128,7 @@ def main():
         print(line)
         index += 16
 
+    file.close()
 
 if __name__ == "__main__":
     main()

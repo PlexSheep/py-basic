@@ -7,7 +7,9 @@ This is a list of tasks that would be cool to add.
 			- (x) Dump basic files with format
 			- (x) Dump basic files with chars
 			- (x) Be able to dump larger files or put out an error
-			- ( ) Stop reading when read gets blocked /somehow/
+			- (x) Stop reading when read gets blocked /somehow/
+						Simple syscall
+			- ( ) Wait for new input when the file is lazy
 			- ( ) Install script to system
 *** Networking
 		- ( ) Mini curl
