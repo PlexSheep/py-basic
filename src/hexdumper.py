@@ -2,6 +2,7 @@
 import argparse
 import os
 import sys
+import io
 import fcntl    # only for non blocking IO, if you dont know what it is, you can ignore it or study up
 
 # 2**30 bytes aka 1 Mebibyte
@@ -35,7 +36,7 @@ def main():
         prog="hd",
         description="Dumps data as hex"
     )
-    parser.add_argument("file")
+    parser.add_argument("file", nargs='?', type=argparse.FileType('rb'), default=sys.stdin)
     parser.add_argument("-c", "--chars", action="store_true")
     parser.add_argument("-f", "--force", action="store_true")   # ignore set limits
     args = parser.parse_args()
@@ -62,7 +63,7 @@ def main():
         # make a syscall that will open our file in readonly mode, nonblocking.
         # if it did not exist and we write to it, it would be created with the
         # perms: 644 (like `chmod 644 myfile`)
-        fd = os.open(args.file, os.O_RDONLY | os.O_NONBLOCK, mode=0o644) 
+        fd = args.file.fileno()
         # now we make the fd into the high level python class `file`
         file = os.fdopen(fd, "rb")
         # i read somewhere that file.readline() does not work like this, but as
@@ -76,12 +77,18 @@ def main():
         sys.exit(1)
 
     # check if the file has a reasonable size to dump
-    if 0 != os.path.getsize(args.file) > MAX_SIZE:
+    try:
+        file.seek(0, os.SEEK_END)
+        flen = file.tell()
+    except io.UnsupportedOperation:
+        # some kinds of "files" like stdin are not seekable
+        flen = 0
+    if 0 != flen > MAX_SIZE:
         print(f"""The file you are trying to dump is larger than 1M.\n\
-        Actual size: {humanbytes(os.path.getsize(args.file))}\nrefusing to dump""")
-    if (0 != os.path.getsize(args.file) > MAX_SIZE) and not args.force:
+        Actual size: {humanbytes(flen)}\nrefusing to dump""")
+    if (0 != flen > MAX_SIZE) and not args.force:
         print(f"The file you are trying to dump is larger than {humanbytes(MAX_SIZE)}.\n\n\
-        Actual size: {humanbytes(os.path.getsize(args.file))}\n\nrefusing to dump. You can force dump the file with --force.")
+        Actual size: {humanbytes(flen)}\n\nrefusing to dump. You can force dump the file with --force.")
         sys.exit(2)
     # print header
     if args.chars:

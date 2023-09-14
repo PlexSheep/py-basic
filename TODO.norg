@@ -12,7 +12,8 @@ This is a list of tasks that would be cool to add.
 			- (x) Wait for new input when the file is lazy
 			- (x) Install script to system
 						Using update-alternatives is the most handy
-		- ( ) Write a complete task for this stuff
+			- (x) Accept input from stdin when no file is given
+			- ( ) Write a complete task for this stuff
 *** Networking
 		- ( ) Mini curl
 *** Packaging
