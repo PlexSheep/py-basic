@@ -37,6 +37,7 @@ def main():
     )
     parser.add_argument("file")
     parser.add_argument("-c", "--chars", action="store_true")
+    parser.add_argument("-f", "--force", action="store_true")   # ignore set limits
     args = parser.parse_args()
 
     # open file
@@ -78,6 +79,9 @@ def main():
     if 0 != os.path.getsize(args.file) > MAX_SIZE:
         print(f"""The file you are trying to dump is larger than 1M.\n\
         Actual size: {humanbytes(os.path.getsize(args.file))}\nrefusing to dump""")
+    if (0 != os.path.getsize(args.file) > MAX_SIZE) and not args.force:
+        print(f"The file you are trying to dump is larger than {humanbytes(MAX_SIZE)}.\n\n\
+        Actual size: {humanbytes(os.path.getsize(args.file))}\n\nrefusing to dump. You can force dump the file with --force.")
         sys.exit(2)
     # print header
     if args.chars:
