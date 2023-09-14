@@ -135,4 +135,9 @@ def main():
     file.close()
 
 if __name__ == "__main__":
-    main()
+    # when called directly (like executed from shell)
+    try:
+        main()
+    except KeyboardInterrupt:
+        # no need for an exception when the user presses ctrl c.
+        sys.exit(0)
