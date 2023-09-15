@@ -13,6 +13,7 @@ This is a list of tasks that would be cool to add.
 			- (x) Install script to system
 						Using update-alternatives is the most handy
 			- (x) Accept input from stdin when no file is given
+			- ( ) Process only first N or last N Bytes
 			- ( ) Write a complete task for this stuff
 *** Networking
 		- ( ) Mini curl

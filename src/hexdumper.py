@@ -80,6 +80,7 @@ def main():
     try:
         file.seek(0, os.SEEK_END)
         flen = file.tell()
+        file.seek(0, os.SEEK_SET)
     except io.UnsupportedOperation:
         # some kinds of "files" like stdin are not seekable
         flen = 0
