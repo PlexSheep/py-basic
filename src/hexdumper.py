@@ -4,6 +4,7 @@ import os
 import sys
 import io
 import fcntl    # only for non blocking IO, if you dont know what it is, you can ignore it or study up
+import select   # to check if the file has data
 
 # 2**30 bytes aka 1 Mebibyte
 MAX_SIZE: int = 0x100000
@@ -69,6 +70,10 @@ def main():
         # i read somewhere that file.readline() does not work like this, but as
         # we are reading binary data anyways, I don't care.
         # check if the file is readable
+        if not select.select([file, ], [], [], 0.0)[0]:
+            print("no data from stdin, are you trying to dump a file?")
+            parser.print_usage()
+            sys.exit(1)
         if not file.peek(1):
             print("File is blocked, trying to wait...")
             file = open(args.file, "rb")
